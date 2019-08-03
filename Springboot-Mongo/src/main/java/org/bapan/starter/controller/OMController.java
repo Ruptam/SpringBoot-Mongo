@@ -5,6 +5,7 @@ package org.bapan.starter.controller;
 
 import java.util.List;
 
+import org.bapan.starter.entity.Order;
 import org.bapan.starter.entity.User;
 import org.bapan.starter.respository.OrderReository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,11 @@ public class OMController {
 	public List<User> getUserByAddress(@PathVariable("byCity") String city) {
 		System.out.println("City Name " +city);
 		return orderRepository.findByCity(city);
+	}
+	
+	@RequestMapping(value="/userByOrder/{productName}",method=RequestMethod.GET)
+	public List<User> getUserByOrder(@PathVariable("productName") String productName) {
+		List<User> users = orderRepository.findByProductName(productName);
+		return users;
 	}
 }
